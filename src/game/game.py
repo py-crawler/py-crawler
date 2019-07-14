@@ -26,7 +26,7 @@ class Game:
         p1 = Platform(0, HEIGHT - 40, WIDTH, 40)
         self.all_sprites.add(p1)
         self.platforms.add(p1)
-        p2 = Platform(WIDTH /2 - 50, HEIGHT * 3 / 4, 100, 20)
+        p2 = Platform(WIDTH / 2 - 50, HEIGHT * 3 / 4, 100, 20)
         self.all_sprites.add(p2)
         self.platforms.add(p2)
         self.run()

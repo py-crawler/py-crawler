@@ -14,12 +14,12 @@ class Player(pygame.sprite.Sprite):
         self.image.fill(RED)
         self.rect = self.image.get_rect()
         self.rect.center = (WIDTH / 2, HEIGHT / 2)
-        self.position = vector(WIDTH / 2, HEIGHT / 2)
-        self.velocity = vector(0, 0)
-        self.acceleration = vector(0, 0)
+        self.position = vector(x=WIDTH / 2, y=HEIGHT / 2)
+        self.velocity = vector(x=0, y=0)
+        self.acceleration = vector(x=0, y=0)
 
     def update(self):
-        self.acceleration = vector(0, 0)
+        self.acceleration = vector(x=0, y=0.5)
         keys = pygame.key.get_pressed()
         if keys[pygame.K_LEFT]:
             self.acceleration.x = -PLAYER_ACCELERATION
