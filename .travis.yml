@@ -11,7 +11,6 @@ stages:
 install:
   # Install required libraries.
   - pip install -r requirements.txt
-  - pip install coveralls
 
 jobs:
   include:
@@ -36,10 +35,5 @@ jobs:
       script:
         - python -m unittest discover -s tests
       python: 3.6
-
-after_success:
-  # Upload coverage data to codecov
-  - coveralls
-
 
 cache: pip
