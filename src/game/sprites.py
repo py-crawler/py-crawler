@@ -27,7 +27,7 @@ class Player(pygame.sprite.Sprite):
             self.acceleration.x = PLAYER_ACCELERATION
 
         # Apply friction.
-        self.acceleration += self.velocity * PLAYER_FRICTION
+        self.acceleration.x += self.velocity.x * PLAYER_FRICTION
         # Equations of motion.
         self.velocity += self.acceleration
         self.position += self.velocity + .5 * self.acceleration
@@ -37,4 +37,16 @@ class Player(pygame.sprite.Sprite):
         if self.position.x < 0:
             self.position.x = WIDTH
 
-        self.rect.center = self.position
+        self.rect.midbottom = self.position
+
+
+class Platform(pygame.sprite.Sprite):
+    __slots__ = ['image', 'rect', ]
+
+    def __init__(self, x, y, width, height):
+        super().__init__()
+        self.image = pygame.Surface((width, height))
+        self.image.fill(GREEN)
+        self.rect = self.image.get_rect()
+        self.rect.x = x
+        self.rect.y = y

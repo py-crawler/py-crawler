@@ -5,7 +5,7 @@ from src.game.sprites import *
 
 class Game:
     __slots__ = ['running', 'screen', 'clock', 'playing', 'all_sprites',
-                 'player']
+                 'player', 'platforms']
 
     def __init__(self):
         # Initialize game window, etc.
@@ -20,8 +20,15 @@ class Game:
     def new(self):
         # Start a new game.
         self.all_sprites = pygame.sprite.Group()
+        self.platforms = pygame.sprite.Group()
         self.player = Player()
         self.all_sprites.add(self.player)
+        p1 = Platform(0, HEIGHT - 40, WIDTH, 40)
+        self.all_sprites.add(p1)
+        self.platforms.add(p1)
+        p2 = Platform(WIDTH /2 - 50, HEIGHT * 3 / 4, 100, 20)
+        self.all_sprites.add(p2)
+        self.platforms.add(p2)
         self.run()
 
     def run(self):
@@ -36,6 +43,10 @@ class Game:
     def update(self):
         # Game loop - Update.
         self.all_sprites.update()
+        hits = pygame.sprite.spritecollide(self.player, self.platforms, False)
+        if hits:
+            self.player.position.y = hits[0].rect.top
+            self.player.velocity.y = 0
 
     def events(self):
         # Game loop - events.
