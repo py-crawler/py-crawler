@@ -59,14 +59,14 @@ class Game:
         self.all_sprites.update()
 
     def draw_grid(self):
-        for x in range(0, s.WIDTH, s.TILESIZE):
-            pygame.draw.line(self.screen, s.LIGHTGREY, (x, 0), (x, s.HEIGHT))
-        for y in range(0, s.HEIGHT, s.TILESIZE):
-            pygame.draw.line(self.screen, s.LIGHTGREY, (0, y), (s.WIDTH, y))
+        for x in range(0, s.WIDTH, s.TILE_SIZE):
+            pygame.draw.line(self.screen, s.LIGHT_GREY, (x, 0), (x, s.HEIGHT))
+        for y in range(0, s.HEIGHT, s.TILE_SIZE):
+            pygame.draw.line(self.screen, s.LIGHT_GREY, (0, y), (s.WIDTH, y))
 
     def draw(self):
         # Game loop - draw.
-        self.screen.fill(s.BGCOLOR)
+        self.screen.fill(s.BG_COLOR)
         self.draw_grid()
         self.all_sprites.draw(self.screen)
         # *after* drawing everything, flip the display

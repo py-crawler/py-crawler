@@ -10,7 +10,7 @@ class Player(pygame.sprite.Sprite):
         self.groups = game.all_sprites
         pygame.sprite.Sprite.__init__(self, self.groups)
         self.game = game
-        self.image = pygame.Surface((s.TILESIZE, s.TILESIZE))
+        self.image = pygame.Surface((s.TILE_SIZE, s.TILE_SIZE))
         self.image.fill(s.RED)
         self.rect = self.image.get_rect()
         self.x = x
@@ -28,8 +28,8 @@ class Player(pygame.sprite.Sprite):
         return False
 
     def update(self):
-        self.rect.x = self.x * s.TILESIZE
-        self.rect.y = self.y * s.TILESIZE
+        self.rect.x = self.x * s.TILE_SIZE
+        self.rect.y = self.y * s.TILE_SIZE
 
 
 class Wall(pygame.sprite.Sprite):
@@ -37,10 +37,10 @@ class Wall(pygame.sprite.Sprite):
         self.groups = game.all_sprites, game.walls
         pygame.sprite.Sprite.__init__(self, self.groups)
         self.game = game
-        self.image = pygame.Surface((s.TILESIZE, s.TILESIZE))
+        self.image = pygame.Surface((s.TILE_SIZE, s.TILE_SIZE))
         self.image.fill(s.GREEN)
         self.rect = self.image.get_rect()
         self.x = x
         self.y = y
-        self.rect.x = x * s.TILESIZE
-        self.rect.y = y * s.TILESIZE
+        self.rect.x = x * s.TILE_SIZE
+        self.rect.y = y * s.TILE_SIZE
