@@ -6,11 +6,10 @@ from src.game.game import Game
 def main():
     g = Game()
     g.show_start_screen()
-    while g.running:
+    while True:
         g.new()
+        g.run()
         g.show_go_screen()
-
-    pygame.quit()
 
 
 if __name__ == '__main__':

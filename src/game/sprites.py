@@ -1,52 +1,39 @@
 # Sprite classes.
 import pygame
 
-from src.game.settings import *
+import src.game.settings as s
 vector = pygame.math.Vector2
 
 
 class Player(pygame.sprite.Sprite):
-    __slots__ = ['image', 'rect', 'position', 'velocity', 'acceleration']
-
-    def __init__(self):
-        super().__init__()
-        self.image = pygame.Surface((30, 40))
-        self.image.fill(RED)
+    def __init__(self, game, x, y):
+        self.groups = game.all_sprites
+        pygame.sprite.Sprite.__init__(self, self.groups)
+        self.game = game
+        self.image = pygame.Surface((s.TILESIZE, s.TILESIZE))
+        self.image.fill(s.RED)
         self.rect = self.image.get_rect()
-        self.rect.center = (WIDTH / 2, HEIGHT / 2)
-        self.position = vector(x=WIDTH / 2, y=HEIGHT / 2)
-        self.velocity = vector(x=0, y=0)
-        self.acceleration = vector(x=0, y=0)
+        self.x = x
+        self.y = y
+
+    def move(self, dx=0, dy=0):
+        self.x += dx
+        self.y += dy
 
     def update(self):
-        self.acceleration = vector(x=0, y=0.5)
-        keys = pygame.key.get_pressed()
-        if keys[pygame.K_LEFT]:
-            self.acceleration.x = -PLAYER_ACCELERATION
-        if keys[pygame.K_RIGHT]:
-            self.acceleration.x = PLAYER_ACCELERATION
-
-        # Apply friction.
-        self.acceleration.x += self.velocity.x * PLAYER_FRICTION
-        # Equations of motion.
-        self.velocity += self.acceleration
-        self.position += self.velocity + .5 * self.acceleration
-        # Wrap around the sides of the screen.
-        if self.position.x > WIDTH:
-            self.position.x = 0
-        if self.position.x < 0:
-            self.position.x = WIDTH
-
-        self.rect.midbottom = self.position
+        self.rect.x = self.x * s.TILESIZE
+        self.rect.y = self.y * s.TILESIZE
 
 
-class Platform(pygame.sprite.Sprite):
-    __slots__ = ['image', 'rect', ]
-
-    def __init__(self, x, y, width, height):
-        super().__init__()
-        self.image = pygame.Surface((width, height))
-        self.image.fill(GREEN)
+class Wall(pygame.sprite.Sprite):
+    def __init__(self, game, x, y):
+        self.groups = game.all_sprites, game.walls
+        pygame.sprite.Sprite.__init__(self, self.groups)
+        self.game = game
+        self.image = pygame.Surface((s.TILESIZE, s.TILESIZE))
+        self.image.fill(s.GREEN)
         self.rect = self.image.get_rect()
-        self.rect.x = x
-        self.rect.y = y
+        self.x = x
+        self.y = y
+        self.rect.x = x * s.TILESIZE
+        self.rect.y = y * s.TILESIZE
