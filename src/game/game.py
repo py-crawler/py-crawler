@@ -80,14 +80,6 @@ class Game:
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_ESCAPE:
                     self.quit()
-                if event.key == pygame.K_LEFT:
-                    self.player.move(dx=-1)
-                if event.key == pygame.K_RIGHT:
-                    self.player.move(dx=1)
-                if event.key == pygame.K_UP:
-                    self.player.move(dy=-1)
-                if event.key == pygame.K_DOWN:
-                    self.player.move(dy=1)
 
     def show_start_screen(self):
         # Start screen.
