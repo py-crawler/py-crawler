@@ -1,0 +1,41 @@
+sudo: false
+dist: xenial
+language: python
+matrix:
+    fast_finish: true
+addons:
+  apt:
+    packages:
+
+stages:
+  - compile
+  - tests
+  - name: deploy
+    if: branch = master
+
+python:
+  - 3.6
+  - 3.7
+  - 3.7-dev     # 3.7 development branch
+  - 3.8
+  - 3.8-dev     # 3.8 development branch
+  - nightly
+
+install:
+  # Install required libraries.
+  - pip install -r requirements.txt
+  - pip install coveralls
+
+script:
+  - ./.travis/compile.sh
+  - python -m unittest discover -s tests
+
+allow_failures:
+  - python: 3.8   # 3.8 Stable/release (not yet out)
+
+after_success:
+  # Upload coverage data to codecov
+  - coveralls
+
+
+cache: pip

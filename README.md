@@ -1,2 +1,2 @@
 # py-platformer
-patformer game based on python.
+platformer game based on python.
