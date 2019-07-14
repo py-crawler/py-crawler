@@ -1,2 +1,2 @@
-# py-platformer
-platformer game based on python.
+# py-crawler
+Dungeon crawler game written in python.
