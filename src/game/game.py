@@ -1,16 +1,18 @@
 import pygame
 from src.game.settings import *
+from src.game.sprites import *
 
 
 class Game:
-    __slots__ = ['running', 'screen', 'clock', 'playing', 'all_sprites']
+    __slots__ = ['running', 'screen', 'clock', 'playing', 'all_sprites',
+                 'player']
 
     def __init__(self):
         # Initialize game window, etc.
         pygame.init()
         pygame.mixer.init()
         self.screen = pygame.display.set_mode((WIDTH, HEIGHT))
-        pygame.display.set_caption("My Game")
+        pygame.display.set_caption(TITTLE)
         self.clock = pygame.time.Clock()
         self.running = True
         self.playing = False
@@ -18,6 +20,8 @@ class Game:
     def new(self):
         # Start a new game.
         self.all_sprites = pygame.sprite.Group()
+        self.player = Player()
+        self.all_sprites.add(self.player)
         self.run()
 
     def run(self):

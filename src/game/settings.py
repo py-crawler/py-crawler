@@ -1,8 +1,14 @@
-WIDTH = 360
-HEIGHT = 480
-FPS = 30
+# Game options/settings.
+TITTLE = "Py-Platformer"
+WIDTH = 1080
+HEIGHT = 720
+FPS = 60
 
-# define colors
+# Player properties.
+PLAYER_ACCELERATION = .5
+PLAYER_FRICTION = -.12
+
+# define colors.
 WHITE = (255, 255, 255)
 BLACK = (0, 0, 0)
 RED = (255, 0, 0)
