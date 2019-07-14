@@ -1,6 +1,7 @@
-# Sprite classes.
+# Pip
 import pygame
 
+# locals
 import src.game.settings as s
 vector = pygame.math.Vector2
 
