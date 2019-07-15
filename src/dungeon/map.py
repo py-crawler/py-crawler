@@ -8,7 +8,7 @@ import src.game.settings as s
 class Map:
     __slots__ = ['data', 'tile_width', 'tile_height', 'width', 'height']
 
-    def __init__(self, filename):
+    def __init__(self, filename: str = 'map.txt'):
         self.data = []
         with open(filename, 'rt') as f:
             for line in f:
@@ -23,12 +23,12 @@ class Map:
 class Camera:
     __slots__ = ['camera', 'width', 'height']
 
-    def __init__(self, width, height):
+    def __init__(self, width: int, height: int):
         self.camera = pygame.Rect(0, 0, width, height)
         self.width = width
         self.height = height
 
-    def apply(self, entity):
+    def apply(self, entity) -> pygame.Rect:
         return entity.rect.move(self.camera.topleft)
 
     def update(self, target):

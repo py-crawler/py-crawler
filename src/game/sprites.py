@@ -9,7 +9,7 @@ vector = pygame.math.Vector2
 class Player(pygame.sprite.Sprite):
     __slots__ = ['groups', 'game', 'image', 'rect', 'velocity', 'position']
 
-    def __init__(self, game, x, y):
+    def __init__(self, game, x: int, y: int):
         self.groups = game.all_sprites
         pygame.sprite.Sprite.__init__(self, self.groups)
         self.game = game
@@ -33,7 +33,7 @@ class Player(pygame.sprite.Sprite):
         if self.velocity.x != 0 and self.velocity.y != 0:
             self.velocity *= s.PLAYER_SPEED_DIAGONAL
 
-    def collide_with_walls(self, direction):
+    def collide_with_walls(self, direction: str):
         if direction == 'x':
             hits = pygame.sprite.spritecollide(self, self.game.walls, False)
             if hits:
