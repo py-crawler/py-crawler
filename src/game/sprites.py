@@ -7,7 +7,7 @@ vector = pygame.math.Vector2
 
 
 class Player(pygame.sprite.Sprite):
-    __slots__ = ['groups', 'game', 'image', 'rect', 'vx', 'vy', 'x', 'y']
+    __slots__ = ['groups', 'game', 'image', 'rect', 'velocity', 'position']
 
     def __init__(self, game, x, y):
         self.groups = game.all_sprites
@@ -16,52 +16,49 @@ class Player(pygame.sprite.Sprite):
         self.image = pygame.Surface((s.TILE_SIZE, s.TILE_SIZE))
         self.image.fill(s.RED)
         self.rect = self.image.get_rect()
-        self.vx, self.vy = 0, 0
-        self.x = x * s.TILE_SIZE
-        self.y = y * s.TILE_SIZE
+        self.velocity = vector(x=0, y=0)
+        self.position = vector(x=x, y=y) * s.TILE_SIZE
 
     def get_keys(self):
-        self.vx, self.vy = 0, 0
+        self.velocity = vector(x=0, y=0)
         keys = pygame.key.get_pressed()
         if keys[pygame.K_LEFT] or keys[pygame.K_a]:
-            self.vx = -s.PLAYER_SPEED
+            self.velocity.x = -s.PLAYER_SPEED
         if keys[pygame.K_RIGHT] or keys[pygame.K_d]:
-            self.vx = s.PLAYER_SPEED
+            self.velocity.x = s.PLAYER_SPEED
         if keys[pygame.K_UP] or keys[pygame.K_w]:
-            self.vy = -s.PLAYER_SPEED
+            self.velocity.y = -s.PLAYER_SPEED
         if keys[pygame.K_DOWN] or keys[pygame.K_s]:
-            self.vy = s.PLAYER_SPEED
-        if self.vx != 0 and self.vy != 0:
-            self.vx *= s.PLAYER_SPEED_DIAGONAL
-            self.vy *= s.PLAYER_SPEED_DIAGONAL
+            self.velocity.y = s.PLAYER_SPEED
+        if self.velocity.x != 0 and self.velocity.y != 0:
+            self.velocity *= s.PLAYER_SPEED_DIAGONAL
 
-    def collide_with_walls(self, dir):
-        if dir == 'x':
+    def collide_with_walls(self, direction):
+        if direction == 'x':
             hits = pygame.sprite.spritecollide(self, self.game.walls, False)
             if hits:
-                if self.vx > 0:
-                    self.x = hits[0].rect.left - self.rect.width
-                if self.vx < 0:
-                    self.x = hits[0].rect.right
-                self.vx = 0
-                self.rect.x = self.x
-        if dir == 'y':
+                if self.velocity.x > 0:
+                    self.position.x = hits[0].rect.left - self.rect.width
+                if self.velocity.x < 0:
+                    self.position.x = hits[0].rect.right
+                self.velocity.x = 0
+                self.rect.x = self.position.x
+        if direction == 'y':
             hits = pygame.sprite.spritecollide(self, self.game.walls, False)
             if hits:
-                if self.vy > 0:
-                    self.y = hits[0].rect.top - self.rect.width
-                if self.vy < 0:
-                    self.y = hits[0].rect.bottom
-                self.vy = 0
-                self.rect.y = self.y
+                if self.velocity.y > 0:
+                    self.position.y = hits[0].rect.top - self.rect.width
+                if self.velocity.y < 0:
+                    self.position.y = hits[0].rect.bottom
+                self.velocity.y = 0
+                self.rect.y = self.position.y
 
     def update(self):
         self.get_keys()
-        self.x += self.vx * self.game.dt
-        self.y += self.vy * self.game.dt
-        self.rect.x = self.x
+        self.position += self.velocity * self.game.dt
+        self.rect.x = self.position.x
         self.collide_with_walls('x')
-        self.rect.y = self.y
+        self.rect.y = self.position.y
         self.collide_with_walls('y')
 
 
