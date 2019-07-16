@@ -7,10 +7,10 @@ docs/_build/
 # Idea configuration.
 .idea
 
-# Code coverage.
-.coverage
-coverage.xml
-
 # Compiled files.
 __pycache__
-*.pyc
+
+#Pyinstaller files.
+/build/
+/dist/
+*.spec
