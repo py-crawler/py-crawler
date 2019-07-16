@@ -49,7 +49,8 @@ class Game:
             self.update()
             self.draw()
 
-    def quit(self):
+    @staticmethod
+    def quit():
         pygame.quit()
         sys.exit()
 
