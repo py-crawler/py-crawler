@@ -8,11 +8,11 @@ Dungeon crawler game written in python.
 > It's not recommended to use Homebrew python when using MacOS Mojave because of this known [issue](https://github.com/pygame/pygame/issues/555). Use the official releases instead.
 - Install pip
 - Install required libraries
->```bash
+```bash
 pip install -U -r requirements.txt
 ```
 - After this you should be able to play by running the main.py file.
->```bash
+```bash
 python main.py
 ```
 
