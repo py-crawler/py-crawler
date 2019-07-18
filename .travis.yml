@@ -17,18 +17,15 @@ jobs:
     # Compile all files.
     - stage: lint
       script:
-        - python -m compileall ./src
-        - python -m compileall ./tests
+        - find . | grep -E "\.py$" | xargs python -m compileall
       python: 3.6
     - stage: lint
       script:
-        - python -m compileall ./src
-        - python -m compileall ./tests
+        - find . | grep -E "\.py$" | xargs python -m compileall
       python: 3.7       # 3.6 stable/release
     - stage: lint
       script:
-        - python -m compileall ./src
-        - python -m compileall ./tests
+        - find . | grep -E "\.py$" | xargs python -m compileall
       python: 3.7-dev   # 3.7 development branch
 
     - stage: test
