@@ -1,5 +1,4 @@
-import pygame
-
+# Locals
 from src.game.game import Game
 
 

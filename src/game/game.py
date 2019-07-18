@@ -12,8 +12,8 @@ from src.dungeon.map import Map, Camera
 
 
 class Game:
-    __slots__ = ['screen', 'clock', 'all_sprites', 'walls', 'player', 'playing',
-                 'dt', 'running', 'map', 'camera']
+    __slots__ = ['screen', 'clock', 'all_sprites', 'walls', 'player',
+                 'playing', 'dt', 'running', 'map', 'camera']
 
     def __init__(self):
         # Initialize game window, etc.
