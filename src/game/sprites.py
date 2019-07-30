@@ -13,8 +13,7 @@ class Player(pygame.sprite.Sprite):
         self.groups = game.all_sprites
         pygame.sprite.Sprite.__init__(self, self.groups)
         self.game = game
-        self.image = pygame.Surface((s.TILE_SIZE, s.TILE_SIZE))
-        self.image.fill(s.RED)
+        self.image = game.player_image
         self.rect = self.image.get_rect()
         self.velocity = vector(x=0, y=0)
         self.position = vector(x=x, y=y) * s.TILE_SIZE

@@ -13,7 +13,7 @@ from src.dungeon.map import Map, Camera
 
 class Game:
     __slots__ = ['screen', 'clock', 'all_sprites', 'walls', 'player',
-                 'playing', 'dt', 'running', 'map', 'camera']
+                 'playing', 'dt', 'running', 'map', 'camera', 'player_image']
 
     def __init__(self):
         # Initialize game window, etc.
@@ -25,8 +25,12 @@ class Game:
         self.load_data()
 
     def load_data(self):
-        game_folder = path.join(path.dirname(__file__), r'../dungeon/maps')
-        self.map = Map(path.join(game_folder, 'map2.txt'))
+        src = path.join(path.dirname(__file__), r'../')
+        assets_folder = path.join(src, r'assets/')
+        images_folder = path.join(assets_folder, r'images/')
+
+        self.map = Map(path.join(src, r'dungeon/maps/map2.txt'))
+        self.player_image = pygame.image.load(path.join(images_folder, r'sprites/human.png')).convert_alpha()
 
     def new(self):
         # Start a new game.
