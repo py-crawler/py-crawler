@@ -1,3 +1,5 @@
+dist: xenial
+
 language: python
 
 addons:
@@ -28,33 +30,14 @@ jobs:
   include:
     # Compile all files.
     - stage: compile
-      matrix:
-        - python: 3.6   # 3.6 stable/release
-          - os: osx
-            osx_image: xcode11
-          - os: linux
-            dist: xenial
+      python: 3.6       # 3.6 stable/release
     - stage: compile
-      matrix:
-        - python: 3.7   # 3.7 stable/release
-          - os: osx
-            osx_image: xcode11
-          - os: linux
-            dist: xenial
+      python: 3.7       # 3.7 stable/release
     - stage: compile
-      matrix:
-        - python: 3.7-dev   # 3.7 development branch
-          - os: osx
-            osx_image: xcode11
-          - os: linux
-            dist: xenial
+      python: 3.7-dev   # 3.7 development branch
     - stage: compile
-      matrix:
-        - python: 3.8-dev   # 3.8 development branch
-          - os: osx
-            osx_image: xcode11
-          - os: linux
-            dist: xenial
+      python: 3.8-dev   # 3.8 development branch
+
     # Run tests
     - stage: test
       python: 3.7
