@@ -1,36 +1,35 @@
-dist: xenial
 language: python
-addons:
-  apt:
-    packages:
+
+dist: xenial
 
 stages:
-  - lint
+  - compile
   - test
+  # - deploy
+  # if: branch = master
 
-install:
-  # Install required libraries.
-  - pip install -r requirements.txt
+script:
+  - find . | grep -E "\.py$" | xargs python -m compileall
 
 jobs:
   include:
     # Compile all files.
-    - stage: lint
-      script:
-        - find . | grep -E "\.py$" | xargs python -m compileall
+    - stage: compile
       python: 3.6
-    - stage: lint
-      script:
-        - find . | grep -E "\.py$" | xargs python -m compileall
+    - stage: compile
       python: 3.7       # 3.6 stable/release
-    - stage: lint
-      script:
-        - find . | grep -E "\.py$" | xargs python -m compileall
+    - stage: compile
       python: 3.7-dev   # 3.7 development branch
+    - stage: compile
+      python: 3.8-dev   # 3.8 development branch
 
+    # Run tests
     - stage: test
+      python: 3.7
+      name: "pep8 conformance"
+      install:
+        - pip install pycodestyle
       script:
-        - python -m unittest discover -s tests
-      python: 3.6
+        - pycodestyle src  --ignore=E501
 
 cache: pip
