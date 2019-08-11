@@ -15,10 +15,6 @@ addons:
       - libavcodec-dev
       - libfreetype6-dev
 
-os:
-  - linux
-  - osx
-
 stages:
   - compile
   - test
@@ -32,14 +28,33 @@ jobs:
   include:
     # Compile all files.
     - stage: compile
-      python: 3.6
+      matrix:
+        - python: 3.6   # 3.6 stable/release
+          - os: osx
+            osx_image: xcode11
+          - os: linux
+            dist: xenial
     - stage: compile
-      python: 3.7       # 3.6 stable/release
+      matrix:
+        - python: 3.7   # 3.7 stable/release
+          - os: osx
+            osx_image: xcode11
+          - os: linux
+            dist: xenial
     - stage: compile
-      python: 3.7-dev   # 3.7 development branch
+      matrix:
+        - python: 3.7-dev   # 3.7 development branch
+          - os: osx
+            osx_image: xcode11
+          - os: linux
+            dist: xenial
     - stage: compile
-      python: 3.8-dev   # 3.8 development branch
-
+      matrix:
+        - python: 3.8-dev   # 3.8 development branch
+          - os: osx
+            osx_image: xcode11
+          - os: linux
+            dist: xenial
     # Run tests
     - stage: test
       python: 3.7
