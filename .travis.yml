@@ -1,5 +1,10 @@
 language: python
 
+addons:
+  apt:
+    packages:
+      - 'libsdl1.2-dev'
+
 matrix:
   include:
     - os: linux
