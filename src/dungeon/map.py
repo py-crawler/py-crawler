@@ -12,6 +12,8 @@ class Map:
         self.data = []
         with open(filename, 'rt') as f:
             for line in f:
+                if line[0] == '#':
+                    continue
                 self.data.append(line.strip())
 
         self.tile_width = len(self.data[0])

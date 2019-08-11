@@ -29,7 +29,7 @@ class Game:
         assets_folder = path.join(src, r'assets/')
         images_folder = path.join(assets_folder, r'images/')
 
-        self.map = Map(path.join(src, r'dungeon/maps/map2.txt'))
+        self.map = Map(path.join(src, r'dungeon/maps/map.txt'))
         self.player_image = pygame.image.load(path.join(images_folder, r'sprites/human.png')).convert_alpha()
 
     def new(self):
